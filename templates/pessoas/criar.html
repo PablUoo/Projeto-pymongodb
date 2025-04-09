@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Criar Nova Pessoa - PyMongo{% endblock %}
+
+{% block header %}
+    <h1><a href="{{ url_for('pessoas') }}">⬅️</a> Criar Nova Pessoa</h1>
+{% endblock %}
+
+{% block content %}
+    <form action="{{ url_for('criar') }}" method="POST" class="mt-4">
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" class="form-control" placeholder="Nome" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="idade">Idade:</label>
+            <input type="number" id="idade" name="idade" class="form-control" placeholder="Idade" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Criar Pessoa</button>
+        <a href="{{ url_for('pessoas') }}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

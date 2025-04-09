@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Página Principal - PyMongo{% endblock %}
+
+{% block header %}
+    <h1>Bem-vindo à Página Principal</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="text-center mt-4">
+        <p>Bem-vindo à página principal do PyMongo!</p>
+        <a href="{{ url_for('pessoas') }}" class="btn btn-primary">Listar Pessoas</a>
+    </div>
+{% endblock %}

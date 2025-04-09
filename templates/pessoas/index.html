@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Pessoas - PyMongo{% endblock %}
+
+{% block header %}
+    <h1><a href="{{ url_for('home') }}">⬅️</a> Pessoas</h1>
+{% endblock %}
+
+{% block content %}
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        <div class="alert alert-info">
+            {% for category, message in messages %}
+                <p class="{{ category }}">{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% endwith %}
+
+    <div class="table-responsive">
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr class="bg-primary text-white" style="cursor: pointer;" onclick="window.location='{{ url_for('criar') }}'">
+                    <th colspan="4" class="text-center">
+                        Criar Nova Pessoa
+                    </th>
+                </tr>                
+                <tr class="thead-dark">
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Idade</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pessoa in pessoas %}
+                    <tr>
+                        <td>{{ pessoa['nome'] }}</td>
+                        <td>{{ pessoa['email'] }}</td>
+                        <td>{{ pessoa['idade'] }}</td>
+                        <td>
+                            <a href="{{ url_for('deletar', pessoa_id=pessoa['_id']) }}" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja deletar?')">Deletar</a>
+                            <a href="{{ url_for('editar', pessoa_id=pessoa['_id']) }}" class="btn btn-primary btn-sm">Editar</a>
+                        </td>                
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
