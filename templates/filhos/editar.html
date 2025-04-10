@@ -1,22 +1,36 @@
 {% extends 'base.html' %}
 
-{% block title %}Editar Filho{% endblock %}
+{% block title %}Editar Filho - PyMongo{% endblock %}
+
+{% block header %}
+    <h1><a href="{{ url_for('listar_filhos', pessoa_id=filho['pessoa_id']) }}">⬅️</a> Editar Filho</h1>
+{% endblock %}
 
 {% block content %}
-<h2>Editar Filho</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alert alert-info">
+                {% for category, message in messages %}
+                    <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
 
-<form method="POST" action="{{ url_for('editar_filho', filho_id=filho['_id']) }}">
-    <div class="form-group">
-        <label for="nome">Nome:</label>
-        <input type="text" class="form-control" id="nome" name="nome" value="{{ filho['nome'] }}" required>
-    </div>
+    <form method="POST" action="{{ url_for('editar_filho', filho_id=filho['_id']) }}" class="mt-4">
+        <div class="form-group">
+            <label for="nome">Nome:</label>
+            <input type="text" class="form-control" id="nome" name="nome" value="{{ filho['nome'] }}" required>
+        </div>
 
-    <div class="form-group">
-        <label for="idade">Idade:</label>
-        <input type="number" class="form-control" id="idade" name="idade" value="{{ filho['idade'] }}" required>
-    </div>
+        <div class="form-group">
+            <label for="idade">Idade:</label>
+            <input type="number" class="form-control" id="idade" name="idade" value="{{ filho['idade'] }}" required>
+        </div>
 
-    <a href="{{ url_for('listar_filhos', pessoa_id=filho['pessoa_id']) }}" class="btn btn-secondary">Cancelar</a>
-    <button type="submit" class="btn btn-primary">Salvar</button>
-</form>
+        <div class="mt-3">
+            <a href="{{ url_for('listar_filhos', pessoa_id=filho['pessoa_id']) }}" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-success">💾 Atualizar</button>
+        </div>
+    </form>
 {% endblock %}

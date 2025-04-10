@@ -17,12 +17,15 @@
         {% endif %}
     {% endwith %}
 
-    <a href="{{ url_for('criar_filho', pessoa_id=pessoa_id) }}" class="btn btn-primary mb-3">➕ Novo Filho</a>
-
     <div class="table-responsive">
-        <table class="table table-striped table-bordered">
-            <thead class="thead-dark">
-                <tr>
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+                <tr class="bg-primary text-white" style="cursor: pointer;" onclick="window.location='{{ url_for('criar_filho', pessoa_id=pessoa_id) }}'">
+                    <th colspan="4" class="text-center">
+                        ➕ Criar Nova Filho
+                    </th>
+                </tr>           
+                <tr class="thead-dark">
                     <th>Nome</th>
                     <th>Idade</th>
                     <th>Ações</th>
@@ -30,20 +33,20 @@
             </thead>
             <tbody>
                 {% for f in filhos %}
-                <tr>
-                    <td>{{ f['nome'] }}</td>
-                    <td>{{ f['idade'] }}</td>
-                    <td>
-                        <a href="{{ url_for('editar_filho', filho_id=f['_id']) }}" class="btn btn-warning btn-sm">Editar</a>
-                        <form action="{{ url_for('deletar_filho', filho_id=f['_id']) }}" method="post" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja deletar este filho?');">
-                            <button type="submit" class="btn btn-danger btn-sm">Deletar</button>
-                        </form>
-                    </td>
-                </tr>
+                    <tr>
+                        <td>{{ f['nome'] }}</td>
+                        <td>{{ f['idade'] }}</td>
+                        <td>
+                            <a href="{{ url_for('editar_filho', filho_id=f['_id']) }}" class="btn btn-primary btn-sm">Editar</a>
+                            <form action="{{ url_for('deletar_filho', filho_id=f['_id']) }}" method="post" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja deletar este filho?');">
+                                <button type="submit" class="btn btn-danger btn-sm">Deletar</button>
+                            </form>
+                        </td>
+                    </tr>
                 {% else %}
-                <tr>
-                    <td colspan="3" class="text-center">Nenhum filho cadastrado.</td>
-                </tr>
+                    <tr>
+                        <td colspan="3" class="text-center">Nenhum filho cadastrado.</td>
+                    </tr>
                 {% endfor %}
             </tbody>
         </table>
