@@ -62,3 +62,19 @@ def init_filhos_routes(app, mongo, to_objectid):
                 flash("Todos os campos são obrigatórios!", "error")
 
         return render_template("filhos/editar.html", filho=filho)
+    
+    @app.route("/filhos/deletar/<filho_id>", methods=["POST"])
+    def deletar_filho(filho_id):
+        filho_oid = to_objectid(filho_id)
+        if not filho_oid:
+            flash("ID do filho inválido", "error")
+            return redirect(url_for("pessoas"))
+
+        filho = mongo.db.filhos.find_one({"_id": filho_oid})
+        if not filho:
+            flash("Filho não encontrado!", "error")
+            return redirect(url_for("pessoas"))
+
+        mongo.db.filhos.delete_one({"_id": filho_oid})
+        flash("Filho deletado com sucesso!", "success")
+        return redirect(url_for("listar_filhos", pessoa_id=str(filho["pessoa_id"])))

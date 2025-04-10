@@ -35,6 +35,9 @@
                     <td>{{ f['idade'] }}</td>
                     <td>
                         <a href="{{ url_for('editar_filho', filho_id=f['_id']) }}" class="btn btn-warning btn-sm">Editar</a>
+                        <form action="{{ url_for('deletar_filho', filho_id=f['_id']) }}" method="post" style="display:inline;" onsubmit="return confirm('Tem certeza que deseja deletar este filho?');">
+                            <button type="submit" class="btn btn-danger btn-sm">Deletar</button>
+                        </form>
                     </td>
                 </tr>
                 {% else %}
