@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Criar Filho{% endblock %}
+
+{% block content %}
+<h2>Criar Novo Filho</h2>
+
+<form method="POST" action="{{ url_for('criar_filho', pessoa_id=pessoa_id) }}">
+    <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" class="form-control" id="nome" name="nome" required>
+    </div>
+
+    <div class="form-group">
+        <label for="idade">Idade:</label>
+        <input type="number" class="form-control" id="idade" name="idade" required>
+    </div>
+
+    <a href="{{ url_for('listar_filhos', pessoa_id=pessoa_id) }}" class="btn btn-secondary">Cancelar</a>
+    <button type="submit" class="btn btn-primary">Criar</button>
+</form>
+{% endblock %}

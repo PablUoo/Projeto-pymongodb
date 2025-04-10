@@ -42,6 +42,8 @@
                         <td>
                             <a href="{{ url_for('deletar', pessoa_id=pessoa['_id']) }}" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja deletar?')">Deletar</a>
                             <a href="{{ url_for('editar', pessoa_id=pessoa['_id']) }}" class="btn btn-primary btn-sm">Editar</a>
+                            <a href="{{ url_for('listar_enderecos', pessoa_id=pessoa['_id']) }}" class="btn btn-info btn-sm">Endereços</a>
+                            <a href="{{ url_for('listar_filhos', pessoa_id=pessoa['_id']) }}" class="btn btn-warning btn-sm">Filhos</a>
                         </td>                
                     </tr>
                 {% endfor %}

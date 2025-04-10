@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Editar Filho{% endblock %}
+
+{% block content %}
+<h2>Editar Filho</h2>
+
+<form method="POST" action="{{ url_for('editar_filho', filho_id=filho['_id']) }}">
+    <div class="form-group">
+        <label for="nome">Nome:</label>
+        <input type="text" class="form-control" id="nome" name="nome" value="{{ filho['nome'] }}" required>
+    </div>
+
+    <div class="form-group">
+        <label for="idade">Idade:</label>
+        <input type="number" class="form-control" id="idade" name="idade" value="{{ filho['idade'] }}" required>
+    </div>
+
+    <a href="{{ url_for('listar_filhos', pessoa_id=filho['pessoa_id']) }}" class="btn btn-secondary">Cancelar</a>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+</form>
+{% endblock %}
